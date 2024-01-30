@@ -1,0 +1,15 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <h1>Login Page</h1>
+    {% if user.is_authenticated %}
+        <p>
+            Você fez login como {{user.username}}.
+            Clique <a href="{% url "contact:logout" %}">aqui</a> para sair.
+        </p>
+        {% else %}
+        <div class="container">
+            {% include "vrenda/partials/_user-form.html" %}
+        </div>
+        {% endif %}
+{% endblock content %}
