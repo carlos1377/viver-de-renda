@@ -6,11 +6,6 @@ from vrenda.models import Flow
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    # email = forms.EmailField(required=False, widget=forms.EmailInput(
-    #     attrs={
-    #         'class': 'form-control',
-    #     }
-    # ))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class': 'form-control'
@@ -31,6 +26,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 
 class EntradaForm(forms.ModelForm):
+
     value = forms.DecimalField(widget=forms.NumberInput(
         attrs={
             'class': 'form-control',
@@ -42,7 +38,8 @@ class EntradaForm(forms.ModelForm):
         }
     ))
 
-    flow = forms.ChoiceField(widget=forms.Select(
+    flow = forms.ModelChoiceField(queryset=Flow.objects.all(),
+                                  widget=forms.Select(
         attrs={
             'class': 'form-select',
         }
@@ -51,8 +48,3 @@ class EntradaForm(forms.ModelForm):
     class Meta:
         model = Entrada
         fields = ('value', 'flow', 'observation')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['flow'].choices = [
-            (flow.id, flow.name) for flow in Flow.objects.all()]

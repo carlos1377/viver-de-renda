@@ -4,6 +4,9 @@ from django.contrib import auth
 from vrenda import forms
 from django.contrib.auth.decorators import login_required
 from vrenda.forms import EntradaForm
+from django.urls import reverse
+
+from vrenda.models import Entrada, Flow
 # Create your views here.
 
 
@@ -42,9 +45,49 @@ def logout(request):
 
 @login_required(login_url='vrenda:login')
 def despesas(request):
-    form = EntradaForm()
+    form_action = reverse('vrenda:despesas')
+
+    if request.method == 'POST':
+        form = forms.EntradaForm(request.POST, instance=Entrada())
+        context = {
+            'form': form,
+            'form_action': form_action,
+        }
+        if form.is_valid():
+            entrada = form.save(commit=False)
+            entrada.user = request.user
+            flow_id = int(request.POST['flow'])
+            flow = Flow.objects.get(id=int(flow_id))
+            entrada.flow = flow
+            entrada.save()
+            return redirect('vrenda:listar_despesas')
+
+        return render(
+            request,
+            'vrenda/despesas.html',
+            context,
+        )
+
+    context = {
+        'form': EntradaForm(),
+        'form_action': form_action,
+    }
+
     return render(
         request,
         'vrenda/despesas.html',
-        context={'form': form}
+        context
+    )
+
+
+@login_required(login_url='vrenda:login')
+def listar_despesas(request):
+    despesas = Entrada.objects.all()
+    context = {
+        'despesas': despesas
+    }
+    return render(
+        request,
+        'vrenda/listar_despesas.html',
+        context
     )

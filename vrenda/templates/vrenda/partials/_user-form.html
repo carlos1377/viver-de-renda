@@ -10,7 +10,7 @@
             {% else %}
             {% if field.name == 'flow' %}
                     {% for option in field.choices %}
-                        <option>{{ option }}</option>
+                        <option value={{option.pk}}>{{ option }}</option>
                     {% endfor %}
             {% endif %}
             <div class="col-sm-6 mb-2">

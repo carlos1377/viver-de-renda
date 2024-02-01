@@ -12,6 +12,7 @@
         <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="{% url "vrenda:index" %}">Home</a>
         <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url "vrenda:login"%}">Login</a>
         <a class="nav-link {% if request.path == '/despesas/' %}active{% endif %}" href="{% url "vrenda:despesas" %}">Despesas</a>
+        <a class="nav-link {% if request.path == '/listar_despesas/' %}active{% endif %}" href="{% url "vrenda:listar_despesas" %}">Listar Despesas</a>
         <a class="nav-link {% if request.path == '/config/' %}active{% endif %}" href="#">Configurações</a>
         {% comment %} <a class="nav-link" href="#">Pricing</a> {% endcomment %}
       </div>
