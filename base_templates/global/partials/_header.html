@@ -1,18 +1,20 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url "vrenda:index" %}"><img src="{% static "global/imgs/doll.png" %}" alt="Logo" width="65" height="50" class="d-inline-block align-text-top"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="{% url "vrenda:index" %}">Home</a>
-            <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url "vrenda:login" %}">Login</a>
-            <a class="nav-link {% if request.path == '/despesas/' %}active{% endif %}" href="#">Despesas</a>
-            <a class="nav-link {% if request.path == '/config/' %}active{% endif %}" href="#">Configurações</a>
-          {% comment %} <a class="nav-link" href="#">Pricing</a> {% endcomment %}
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url "vrenda:index" %}"><img src="{% static "global/imgs/doll.png" %}" alt="Logo"
+        width="65" height="50" class="d-inline-block align-text-top"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="{% url "vrenda:index" %}">Home</a>
+        <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url "vrenda:login"%}">Login</a>
+        <a class="nav-link {% if request.path == '/despesas/' %}active{% endif %}" href="{% url "vrenda:despesas" %}">Despesas</a>
+        <a class="nav-link {% if request.path == '/config/' %}active{% endif %}" href="#">Configurações</a>
+        {% comment %} <a class="nav-link" href="#">Pricing</a> {% endcomment %}
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

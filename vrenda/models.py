@@ -24,7 +24,7 @@ class Flow(models.Model):
     description = models.TextField(blank=True)
     type_of = models.ForeignKey(
         FlowType, on_delete=models.SET_NULL, blank=True, null=True)
-    clasification = models.ForeignKey(
+    classification = models.ForeignKey(
         Classification, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self) -> str:
@@ -39,4 +39,3 @@ class Entrada(models.Model):
     flow = models.ForeignKey(
         Flow, on_delete=models.SET_NULL, blank=True, null=True)
     observation = models.TextField(blank=True)
-    email = models.EmailField(max_length=254, blank=True)

@@ -1,15 +1,32 @@
 <form action="{{ form_action }}" method="POST">
     {% csrf_token %}
-    <div class="mb-3">
-    {% for field in form %}
-        <label class="form-label"for="{{ field.id_for_label }}">{{field.label}}</label>
-        {{ field }}
-        {{ field.errors }}
+    <div class="mb-12 mt-4">
+        {% for field in form %}
+            <label class="form-label" for="{{ field.id_for_label }}">{{field.label}}</label>
+            {% if field.name == "value" %}
+                <div class="col-sm-2 mb-2">
+                    {{ field }}
+                </div>
+            {% else %}
+            {% if field.name == 'flow' %}
+                    {% for option in field.choices %}
+                        <option>{{ option }}</option>
+                    {% endfor %}
+            {% endif %}
+            <div class="col-sm-6 mb-2">
+                {{ field }}
+            </div>
+            {% endif %}
 
-        {% if field.help_text %}
-        <p class="form-text">{{field.help_text}}</p>
-        {% endif %}
+            {% if field.errors %}
+                <div class="invalid-feedback">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+            {% if field.help_text %}
+                <p class="form-text">{{field.help_text}}</p>
+            {% endif %}
         {% endfor %}
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
 </form>
