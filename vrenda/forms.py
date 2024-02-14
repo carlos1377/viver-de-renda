@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from vrenda.models import Entrada
-from vrenda.models import Flow
+from vrenda.models import Entrada  # type: ignore
+from vrenda.models import Flow  # type: ignore
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -30,6 +30,7 @@ class EntradaForm(forms.ModelForm):
     value = forms.DecimalField(widget=forms.NumberInput(
         attrs={
             'class': 'form-control',
+            'type': 'number',
         }
     ))
     observation = forms.CharField(widget=forms.Textarea(
@@ -38,13 +39,16 @@ class EntradaForm(forms.ModelForm):
         }
     ))
 
-    flow = forms.ModelChoiceField(queryset=Flow.objects.all(),
-                                  widget=forms.Select(
-        attrs={
-            'class': 'form-select',
-        }
-    ))
+    flow = forms.ModelChoiceField(
+        queryset=Flow.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+            }
+        ))
 
     class Meta:
         model = Entrada
         fields = ('value', 'flow', 'observation')
+
+# class ConfigurationForm(forms.ModelForm):

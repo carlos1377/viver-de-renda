@@ -4,7 +4,7 @@
     <h1>Login Page</h1>
     {% if user.is_authenticated %}
         <p class="alert alert-info mt-5">
-            Você fez login como {{user.username}}.
+            Você fez login como <b>{{user.username}} </b>.
             Clique <a href="{% url "vrenda:logout" %}">aqui</a> para sair.
         </p>
         {% else %}

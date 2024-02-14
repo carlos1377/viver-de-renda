@@ -28,7 +28,7 @@ class Flow(models.Model):
         Classification, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self) -> str:
-        return f'#{self.pk} - {self.name} '
+        return self.name
 
 
 class Entrada(models.Model):

@@ -1,24 +1,31 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <table class="table mt-5">
-        <thead>
-            <tr>
-                <th scope="col">Valor</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Fluxo</th>
-                <th scope="col">Data</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for despesa in despesas %}
-                <tr>
-                    <th scope="col"> {{despesa.value}} </th>
-                    <th> {{despesa.observation}}</th>
-                    <th> {{despesa.flow}} </th>
-                    <th> {{despesa.date}} </th>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  <table class="table table-bordered mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Valor</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Fluxo</th>
+        <th scope="col">Data</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for despesa in despesas %}
+        <tr>
+          <th scope="row">{{ despesa.value }}</th>
+          <th>{{ despesa.observation }}</th>
+          <th>{{ despesa.flow }}</th>
+          <th>{{ despesa.date }}</th>
+          <th>
+            <div class="d-grid gap-2 d-md-block">
+              <button class="btn btn-primary" type="button">Editar</button>
+              <button class="btn btn-danger" type="button">Deletar</button>
+            </div>
+          </th>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock content %}

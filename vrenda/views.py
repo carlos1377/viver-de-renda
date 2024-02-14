@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
 from django.contrib import auth
 from vrenda import forms
 from django.contrib.auth.decorators import login_required
 from vrenda.forms import EntradaForm
 from django.urls import reverse
 
-from vrenda.models import Entrada, Flow
+from vrenda.models import Entrada, Flow  # type: ignore
 # Create your views here.
 
 
@@ -82,12 +82,22 @@ def despesas(request):
 
 @login_required(login_url='vrenda:login')
 def listar_despesas(request):
-    despesas = Entrada.objects.all()
+    despesas = Entrada.objects.filter(user=request.user,).order_by('-date')
     context = {
         'despesas': despesas
     }
     return render(
         request,
         'vrenda/listar_despesas.html',
+        context
+    )
+
+
+@login_required(login_url='vrenda:login')
+def configuracoes(request):
+    context = {}
+    return render(
+        request,
+        'vrenda/configuracoes.html',
         context
     )
